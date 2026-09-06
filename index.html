@@ -1,10 +1,308 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CatGPT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatGPT — Welcome</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Trebuchet MS", "Arial Rounded MT Bold", Arial, sans-serif;
+            color: #174b63;
+            background:
+                radial-gradient(circle at 20% 20%, #ffffff 0 4%, transparent 5%),
+                radial-gradient(circle at 80% 30%, #b9f8ff 0 8%, transparent 9%),
+                linear-gradient(135deg, #8eeeff, #5bd5e8 45%, #d9fbff);
+            overflow-x: hidden;
+        }
+
+        /* Decorative bubbles */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.28);
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            box-shadow:
+                inset 8px 8px 15px rgba(255, 255, 255, 0.6),
+                0 10px 30px rgba(0, 130, 170, 0.12);
+            pointer-events: none;
+        }
+
+        .bubble.one {
+            width: 120px;
+            height: 120px;
+            top: 8%;
+            left: 7%;
+        }
+
+        .bubble.two {
+            width: 70px;
+            height: 70px;
+            top: 65%;
+            right: 12%;
+        }
+
+        .bubble.three {
+            width: 180px;
+            height: 180px;
+            bottom: -50px;
+            left: -40px;
+        }
+
+        header {
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 80, 120, 0.3);
+        }
+
+        nav a {
+            color: #07516d;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        main {
+            width: min(1000px, 90%);
+            margin: 50px auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 30px;
+            border-radius: 35px;
+
+            background: rgba(255, 255, 255, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.65);
+
+            box-shadow:
+                0 25px 60px rgba(0, 100, 140, 0.18),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
+
+            backdrop-filter: blur(14px);
+        }
+
+        .cat {
+            font-size: 5rem;
+            filter: drop-shadow(0 8px 8px rgba(0, 100, 130, 0.18));
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            color: white;
+            text-shadow:
+                0 4px 0 #43aec7,
+                0 7px 15px rgba(0, 100, 130, 0.25);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+
+            background: linear-gradient(
+                to bottom,
+                #7ff4ff,
+                #27b9d5
+            );
+
+            border: 2px solid rgba(255, 255, 255, 0.8);
+
+            box-shadow:
+                0 7px 0 #1594b1,
+                0 12px 25px rgba(0, 100, 140, 0.2),
+                inset 0 3px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .button:hover {
+            transform: translateY(2px);
+            box-shadow:
+                0 4px 0 #1594b1,
+                0 8px 18px rgba(0, 100, 140, 0.2);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.45);
+            border: 2px solid rgba(255, 255, 255, 0.65);
+
+            box-shadow:
+                0 15px 30px rgba(0, 100, 140, 0.13),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+        }
+
+        .card h2 {
+            margin-bottom: 8px;
+            color: #087495;
+        }
+
+        .card p {
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #28647a;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 45px 20px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hello!</h1>
-    <h2>Welcome to CatGPT</h2>
+
+    <!-- Decorative bubbles -->
+    <div class="bubble one"></div>
+    <div class="bubble two"></div>
+    <div class="bubble three"></div>
+
+    <header>
+        <div class="logo">🐱 CatGPT</div>
+
+        <nav>
+            <a href="#about">About Cats</a>
+            <a href="#facts">Cat Facts</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <div class="cat">🐱</div>
+
+            <h1>Hello!</h1>
+
+            <p class="subtitle">
+                Welcome to <strong>CatGPT</strong> — your friendly feline
+                corner of the internet. Learn about cats, discover weird
+                cat facts, and embrace the mysterious world of tiny paws,
+                whiskers, and extremely important naps.
+            </p>
+
+            <a class="button" href="#facts">
+                Explore the Cats ✨
+            </a>
+        </section>
+
+        <section class="cards" id="facts">
+
+            <div class="card">
+                <div class="card-icon">🐾</div>
+                <h2>Curious Creatures</h2>
+                <p>
+                    Cats are naturally curious. They love investigating
+                    boxes, bags, shelves, cupboards, and basically anything
+                    they have been told not to investigate.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">😺</div>
+                <h2>Cat Communication</h2>
+                <p>
+                    Cats communicate using sounds, body language, facial
+                    expressions, scent, and tail movements. A slow blink can
+                    even be a friendly signal.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💤</div>
+                <h2>Professional Sleepers</h2>
+                <p>
+                    Cats spend a large part of their day sleeping or resting.
+                    Apparently, being adorable, mysterious, and occasionally
+                    chaotic requires plenty of energy conservation.
+                </p>
+            </div>
+
+        </section>
+
+        <section class="hero" id="about" style="margin-top: 30px; padding: 40px;">
+            <h2>Why CatGPT?</h2>
+
+            <p class="subtitle">
+                Because the internet needs more cats. CatGPT combines
+                futuristic technology with the timeless wisdom of the
+                feline species.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        Made with 🐾, bubbles, and questionable amounts of cat hair.
+        <br>
+        © 2026 CatGPT
+    </footer>
+
 </body>
 </html>
+```
